@@ -1,35 +1,10 @@
-.about {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4rem 2rem;
-}
-
-.about-text {
-  max-width: 600px;
-}
-
-.about-card {
-  transition: all 0.3s ease;
-  background: rgba(31, 41, 55, 0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.about-card:hover {
-  transform: translateY(-10px);
-  border-color: #4f46e5;
-}
-
 .lanyard-container {
   position: relative;
-  width: 300px;
-  height: 400px;
+  width: 400px; /* Increase container width */
+  height: 600px; /* Increase container height */
   perspective: 1000px;
   cursor: grab;
-  margin-left: 200px; /* Menggeser ke kanan */
-  margin-right: 0;
-  transform: translateX(50px);
+  margin-left: 200px;
 }
 
 .lanyard-container:active {
@@ -37,59 +12,58 @@
 }
 
 .lanyard-card {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%; /* Make the card occupy more space within the container */
+  height: auto;
   transform-style: preserve-3d;
   transition: transform 0.05s linear;
   transform-origin: top center;
 }
 
 .lanyard-string {
-  position: absolute; /* Changed to fixed for full-page height */
-  top: -300px; /* Sesuaikan dengan tinggi tali agar menyentuh bagian atas card */
+  position: absolute;
+  top: -400px; /* Adjust string length for larger card */
   left: 50%;
-  width: 4px;
-  height: 1500px; /* Full viewport height */
+  width: 6px; /* Thicker string for visual balance */
   background: linear-gradient(to bottom, #333, #555);
   transform-origin: top center;
-  transform: scaleY(0.2); /* Initial scale */
+  transform: scaleY(1) rotate(0deg);
   transition: transform 0.3s ease;
 }
 
 .lanyard-id {
-  position: absolute;
   width: 100%;
   height: 100%;
   background: white;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 24px; /* Larger border radius for a bigger card */
+  padding: 30px; /* Increased padding for better spacing */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform-origin: top center;
+  gap: 20px; /* Add spacing between image and text */
 }
 
 .lanyard-image {
-  width: 80%;
+  width: 100%; /* Ensure the image fills the container */
   height: auto;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  object-fit: cover;
+  border-radius: 16px; /* Larger border radius for the image */
+  object-fit: cover; /* Maintain aspect ratio */
 }
 
-/* Smooth idle animation */
+/* Idle Animation */
 @keyframes gentleSwing {
   0%,
   100% {
-    transform: rotate(0deg) translateX(0);
+    transform: rotate(0deg);
   }
   25% {
-    transform: rotate(1deg) translateX(3px);
+    transform: rotate(1deg);
   }
   75% {
-    transform: rotate(-1deg) translateX(-3px);
+    transform: rotate(-1deg);
   }
 }
 
@@ -97,11 +71,7 @@
   animation: gentleSwing 4s ease-in-out infinite;
 }
 
-.lanyard-card {
-  animation: gentleSwing 4s ease-in-out infinite;
-}
-
-/* Dragging animation */
+/* Dragging Animation */
 .lanyard-container.dragging .lanyard-card {
   transition: none;
   animation: none;
@@ -111,26 +81,10 @@
   transition: none;
 }
 
-/* Release animation */
+/* Release Animation */
 @keyframes releaseSwing {
   0% {
     transform: translate(var(--mouse-x), var(--mouse-y)) rotate(var(--rotation));
-  }
-  20% {
-    transform: translate(calc(var(--mouse-x) * 0.8), calc(var(--mouse-y) * 0.8))
-      rotate(calc(var(--rotation) * 0.7));
-  }
-  40% {
-    transform: translate(calc(var(--mouse-x) * 0.5), calc(var(--mouse-y) * 0.5))
-      rotate(calc(var(--rotation) * -0.3));
-  }
-  60% {
-    transform: translate(calc(var(--mouse-x) * 0.2), calc(var(--mouse-y) * 0.2))
-      rotate(calc(var(--rotation) * 0.2));
-  }
-  80% {
-    transform: translate(calc(var(--mouse-x) * 0.1), calc(var(--mouse-y) * 0.1))
-      rotate(calc(var(--rotation) * -0.1));
   }
   100% {
     transform: translate(0, 0) rotate(0);
@@ -152,4 +106,100 @@
 
 .lanyard-container.released .lanyard-string {
   animation: stringFollow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.about-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem; /* Sesuaikan dengan rounded-lg */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+  background: #1f2937; /* Lebih gelap */
+}
+
+/* Garis atas */
+.about-card::before {
+  content: "";
+  position: absolute;
+  top: -5px; /* Posisi di atas card */
+  left: 0;
+  width: 100%;
+  height: 5px; /* Ketebalan garis */
+  background-color: #4f46e5;
+  animation: moveTop 5s linear infinite;
+}
+
+/* Garis bawah */
+.about-card::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Posisi di bawah card */
+  left: 0;
+  width: 100%;
+  height: 5px; /* Ketebalan garis */
+  background-color: #4f46e5;
+  animation: moveBottom 5s linear infinite;
+}
+
+/* Garis kiri */
+.about-card .left-light {
+  position: absolute;
+  top: 0;
+  left: -5px; /* Posisi di sebelah kiri card */
+  width: 5px; /* Ketebalan garis */
+  height: 100%;
+  background-color: #4f46e5;
+  animation: moveLeft 5s linear infinite;
+}
+
+/* Garis kanan */
+.about-card .right-light {
+  position: absolute;
+  top: 0;
+  right: -5px; /* Posisi di sebelah kanan card */
+  width: 5px; /* Ketebalan garis */
+  height: 100%;
+  background-color: #4f46e5;
+  animation: moveRight 5s linear infinite;
+}
+
+/* Animasi gerakan garis */
+@keyframes moveTop {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes moveBottom {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
