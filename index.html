@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Afif Taufiqurrohman - Portfolio</title>
+    <link rel="stylesheet" href="assets/css/home.css" />
+    <link rel="stylesheet" href="assets/css/mobile-menu.css" />
+    <link rel="stylesheet" href="assets/css/sidebar.css" />
+    <link rel="stylesheet" href="assets/css/hero.css" />
+    <link rel="stylesheet" href="assets/css/about.css" />
+    <link rel="stylesheet" href="assets/css/skills.css" />
+    <link rel="stylesheet" href="assets/css/projects.css" />
+    <link rel="stylesheet" href="assets/css/contact.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/css/animations.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <meta
+      name="description"
+      content="Portfolio website of Afif Taufiqurrohman - Full Stack Developer & Software Engineer"
+    />
+    <meta
+      name="keywords"
+      content="developer, software engineer, portfolio, web development"
+    />
+    <meta name="author" content="Afif Taufiqurrohman" />
+    <meta property="og:title" content="Afif Taufiqurrohman - Portfolio" />
+    <meta
+      property="og:description"
+      content="Full Stack Developer & Software Engineer"
+    />
+    <meta property="og:image" content="[URL to your profile image]" />
+    <link rel="canonical" href="[Your website URL]" />
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <!-- Mobile Menu Button -->
+    <button
+      class="fixed top-4 right-4 z-50 md:hidden bg-gray-800 p-2 rounded-lg"
+      onclick="toggleMobileMenu()"
+    >
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu items-center justify-center">
+      <div class="text-center space-y-8">
+        <a
+          href="#home"
+          class="block text-2xl hover:text-purple-400 transition-colors"
+          >Home</a
+        >
+        <a
+          href="#about"
+          class="block text-2xl hover:text-purple-400 transition-colors"
+          >About</a
+        >
+        <a
+          href="#skills"
+          class="block text-2xl hover:text-purple-400 transition-colors"
+          >Skills</a
+        >
+        <a
+          href="#projects"
+          class="block text-2xl hover:text-purple-400 transition-colors"
+          >Projects</a
+        >
+        <a
+          href="#contact"
+          class="block text-2xl hover:text-purple-400 transition-colors"
+          >Contact</a
+        >
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <nav
+      class="sidebar fixed top-0 right-0 h-screen w-64 p-6 flex flex-col justify-between"
+    >
+      <div class="space-y-6">
+        <a href="#home" class="block hover:text-purple-400 transition-colors"
+          >Home</a
+        >
+        <a href="#about" class="block hover:text-purple-400 transition-colors"
+          >About</a
+        >
+        <a href="#skills" class="block hover:text-purple-400 transition-colors"
+          >Skills</a
+        >
+        <a
+          href="#projects"
+          class="block hover:text-purple-400 transition-colors"
+          >Projects</a
+        >
+        <a href="#contact" class="block hover:text-purple-400 transition-colors"
+          >Contact</a
+        >
+      </div>
+      <div class="flex space-x-4">
+        <a href="#" class="hover:text-purple-400"
+          ><i class="fab fa-github text-2xl"></i
+        ></a>
+        <a href="#" class="hover:text-purple-400"
+          ><i class="fab fa-linkedin text-2xl"></i
+        ></a>
+        <a href="#" class="hover:text-purple-400"
+          ><i class="fab fa-twitter text-2xl"></i
+        ></a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="ml-0 mr-64 md:mr-0">
+      <!-- Hero Section -->
+      <section
+        id="home"
+        class="min-h-screen flex items-center px-20 animate-float w-full"
+      >
+        <div data-aos="fade-right">
+          <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">
+            I am Afif Taufiqurrohman
+          </h1>
+          <p class="text-xl text-gray-400 max-w-2xl mb-8">
+            Full Stack Developer & Software Engineer
+          </p>
+          <a
+            href="#contact"
+            class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full transition-colors"
+          >
+            Get in touch
+          </a>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="min-h-screen flex items-center px-20">
+        <div class="grid grid-cols-2 gap-20">
+          <div class="lanyard-container" data-aos="fade-right">
+            <div class="lanyard-string"></div>
+            <div class="lanyard-card">
+              <div class="lanyard-id">
+                <img
+                  src="/api/placeholder/400/400"
+                  alt="Afif Taufiqurrohman"
+                  class="lanyard-image shadow-lg"
+                />
+                <h3 class="text-xl font-bold">Afif Taufiqurrohman</h3>
+                <p class="text-gray-600">Developer</p>
+              </div>
+            </div>
+          </div>
+
+          <div data-aos="fade-left" class="space-y-6">
+            <h2 class="text-4xl font-bold gradient-text">About Me</h2>
+            <p class="text-gray-400 leading-relaxed">
+              A passionate developer with expertise in multiple programming
+              languages and frameworks. I love creating beautiful and functional
+              applications that solve real-world problems.
+            </p>
+            <div class="grid grid-cols-2 gap-4 mt-8">
+              <div class="p-4 bg-gray-800 rounded-lg about-card">
+                <h3 class="font-bold mb-2">Experience</h3>
+                <p class="text-gray-400">5+ Years</p>
+              </div>
+              <div class="p-4 bg-gray-800 rounded-lg about-card">
+                <h3 class="font-bold mb-2">Projects</h3>
+                <p class="text-gray-400">50+ Completed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="min-h-screen px-20 py-20">
+        <h2 class="text-4xl font-bold gradient-text mb-20" data-aos="fade-up">
+          My Skills
+        </h2>
+        <div class="grid grid-cols-3 gap-10">
+          <div class="skill-card p-6 rounded-xl" data-aos="zoom-in">
+            <i class="fas fa-code text-4xl mb-4 text-purple-400"></i>
+            <h3 class="text-xl font-bold mb-4">Frontend</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li><i class="fas fa-check mr-2"></i>HTML5 & CSS3</li>
+              <li><i class="fas fa-check mr-2"></i>JavaScript/TypeScript</li>
+              <li><i class="fas fa-check mr-2"></i>React.js</li>
+              <li><i class="fas fa-check mr-2"></i>Next.js</li>
+            </ul>
+          </div>
+          <div
+            class="skill-card p-6 rounded-xl"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <i class="fas fa-server text-4xl mb-4 text-purple-400"></i>
+            <h3 class="text-xl font-bold mb-4">Backend</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li><i class="fas fa-check mr-2"></i>Node.js</li>
+              <li><i class="fas fa-check mr-2"></i>Python</li>
+              <li><i class="fas fa-check mr-2"></i>Java</li>
+              <li><i class="fas fa-check mr-2"></i>PHP</li>
+            </ul>
+          </div>
+          <div
+            class="skill-card p-6 rounded-xl"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <i class="fas fa-tools text-4xl mb-4 text-purple-400"></i>
+            <h3 class="text-xl font-bold mb-4">Tools & Others</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li><i class="fas fa-check mr-2"></i>Git & GitHub</li>
+              <li><i class="fas fa-check mr-2"></i>Docker</li>
+              <li><i class="fas fa-check mr-2"></i>AWS</li>
+              <li><i class="fas fa-check mr-2"></i>MongoDB</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="min-h-screen px-20 py-20">
+        <h2 class="text-4xl font-bold gradient-text mb-20" data-aos="fade-up">
+          Latest Projects
+        </h2>
+        <div class="grid grid-cols-2 gap-10">
+          <div
+            class="project-card bg-gray-800 rounded-xl overflow-hidden"
+            data-aos="fade-up"
+          >
+            <img
+              src="/api/placeholder/600/300"
+              alt="Project 1"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">E-Commerce Platform</h3>
+              <p class="text-gray-400 mb-4">
+                A full-stack e-commerce solution with React and Node.js
+              </p>
+              <div class="flex space-x-2">
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >React</span
+                >
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >Node.js</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="project-card bg-gray-800 rounded-xl overflow-hidden"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <img
+              src="/api/placeholder/600/300"
+              alt="Project 2"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Social Media App</h3>
+              <p class="text-gray-400 mb-4">
+                Real-time social platform with modern features
+              </p>
+              <div class="flex space-x-2">
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >Next.js</span
+                >
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >MongoDB</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="min-h-screen px-20 py-20">
+        <h2 class="text-4xl font-bold gradient-text mb-20" data-aos="fade-up">
+          Get in Touch
+        </h2>
+        <div class="grid grid-cols-2 gap-20">
+          <div data-aos="fade-right">
+            <form class="space-y-6">
+              <div>
+                <label class="block text-gray-400 mb-2">Name</label>
+                <input
+                  type="text"
+                  class="w-full bg-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              <div>
+                <label class="block text-gray-400 mb-2">Email</label>
+                <input
+                  type="email"
+                  class="w-full bg-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              <div>
+                <label class="block text-gray-400 mb-2">Message</label>
+                <textarea
+                  class="w-full bg-gray-800 rounded-lg p-3 h-32 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                ></textarea>
+              </div>
+              <button
+                class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full transition-colors w-full"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+          <div data-aos="fade-left" class="space-y-8">
+            <div>
+              <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+              <p class="text-gray-400">
+                <i class="fas fa-envelope mr-2"></i> email@example.com
+              </p>
+              <p class="text-gray-400">
+                <i class="fas fa-phone mr-2"></i> +1234567890
+              </p>
+              <p class="text-gray-400">
+                <i class="fas fa-map-marker-alt mr-2"></i> Your Location
+              </p>
+            </div>
+            <div class="mt-12">
+              <h3 class="text-xl font-bold mb-4">Follow Me</h3>
+              <div class="flex space-x-6">
+                <a
+                  href="#"
+                  class="text-3xl hover:text-purple-400 transition-colors"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+                <a
+                  href="#"
+                  class="text-3xl hover:text-purple-400 transition-colors"
+                >
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a
+                  href="#"
+                  class="text-3xl hover:text-purple-400 transition-colors"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a
+                  href="#"
+                  class="text-3xl hover:text-purple-400 transition-colors"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-gray-800 py-8 px-20">
+        <div
+          class="container mx-auto flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-400">
+            &copy; 2024 Afif Taufiqurrohman. All rights reserved.
+          </p>
+          <div class="mt-4 md:mt-0">
+            <a href="#" class="text-gray-400 hover:text-purple-400 mx-2"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-400 hover:text-purple-400 mx-2"
+              >Terms of Service</a
+            >
+          </div>
+        </div>
+      </footer>
+      <!-- Tombol Toggle Sidebar -->
+      <div class="sidebar"></div>
+      <button class="sidebar-toggle">
+        <i class="fa-solid fa-chess-king"></i>
+      </button>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-overlay"></div>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </main>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=[YOUR-ID]"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "[YOUR-ID]");
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: false,
+        mirror: true,
+      });
+
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const mobileMenu = document.querySelector(".mobile-menu");
+        mobileMenu.classList.toggle("active");
+      }
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          target.scrollIntoView({
+            behavior: "smooth",
+          });
+          // Close mobile menu if open
+          const mobileMenu = document.querySelector(".mobile-menu");
+          if (mobileMenu.classList.contains("active")) {
+            mobileMenu.classList.remove("active");
+          }
+        });
+      });
+
+      // Form submission handling
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        // Add your form submission logic here
+        alert("Thank you for your message! I will get back to you soon.");
+        form.reset();
+      });
+
+      // Scroll progress indicator
+      window.addEventListener("scroll", () => {
+        const scrollProgress =
+          window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight);
+        document.documentElement.style.setProperty(
+          "--scroll-progress",
+          `${scrollProgress * 100}%`
+        );
+      });
+
+      // Skills animation on viewport
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-skill");
+          }
+        });
+      });
+
+      document.querySelectorAll(".skill-card").forEach((card) => {
+        observer.observe(card);
+      });
+
+      // Sidebar toggle buka tutup
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.querySelector(".sidebar");
+        const toggleBtn = document.querySelector(".sidebar-toggle");
+        const overlay = document.querySelector(".sidebar-overlay");
+
+        function toggleSidebar() {
+          sidebar.classList.toggle("active");
+          overlay.style.display = sidebar.classList.contains("active")
+            ? "block"
+            : "none";
+
+          // Animasi tombol toggle
+          if (sidebar.classList.contains("active")) {
+            toggleBtn.style.left = "260px";
+            toggleBtn.style.zIndex = "900";
+          } else {
+            toggleBtn.style.left = "25px";
+            toggleBtn.style.zIndex = "1100";
+          }
+        }
+
+        // Event listeners
+        toggleBtn.addEventListener("click", toggleSidebar);
+        overlay.addEventListener("click", toggleSidebar);
+
+        // Tutup dengan ESC
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && sidebar.classList.contains("active")) {
+            toggleSidebar();
+          }
+        });
+
+        // Responsif untuk mobile
+        window.addEventListener("resize", () => {
+          if (
+            window.innerWidth <= 768 &&
+            sidebar.classList.contains("active")
+          ) {
+            toggleBtn.style.left = "calc(100% - 65px)";
+          }
+        });
+
+        let isDragging = false;
+        let startX, startY;
+        const container = document.querySelector(".lanyard-container");
+        const card = document.querySelector(".lanyard-card");
+        const string = document.querySelector(".lanyard-string");
+
+        container.addEventListener("mousedown", (e) => {
+          isDragging = true;
+          container.classList.add("dragging");
+          startX = e.clientX - card.offsetLeft;
+          startY = e.clientY - card.offsetTop;
+
+          document.addEventListener("mousemove", onMouseMove);
+          document.addEventListener("mouseup", onMouseUp);
+        });
+
+        function onMouseMove(e) {
+          if (!isDragging) return;
+
+          const x = e.clientX - startX;
+          const y = e.clientY - startY;
+          const rotation = x / 15; // Reduced rotation factor for more natural movement
+
+          // Calculate string angle and stretch based on card position
+          const stringAngle = Math.atan2(y, x) * (180 / Math.PI);
+          const stringStretch = Math.sqrt(x * x + y * y) / 300 + 1;
+
+          // Update CSS variables
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+          card.style.setProperty("--rotation", `${rotation}deg`);
+          string.style.setProperty("--string-angle", `${stringAngle}deg`);
+          string.style.setProperty("--string-stretch", stringStretch);
+
+          // Apply transforms
+          card.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+          string.style.transform = `scaleY(${stringStretch}) rotate(${stringAngle}deg)`;
+        }
+
+        function onMouseUp() {
+          if (!isDragging) return;
+          isDragging = false;
+          container.classList.remove("dragging");
+          container.classList.add("released");
+
+          setTimeout(() => {
+            container.classList.remove("released");
+            card.style.transform = "";
+            string.style.transform = "";
+          }, 1500);
+
+          document.removeEventListener("mousemove", onMouseMove);
+          document.removeEventListener("mouseup", onMouseUp);
+        }
+      });
+    </script>
+  </body>
+</html>

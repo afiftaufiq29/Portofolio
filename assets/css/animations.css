@@ -1,0 +1,38 @@
+/* Animasi Floating */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Efek Hover untuk Skill Card */
+.skill-card {
+  transition: all 0.3s ease;
+  background: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-card:hover {
+  transform: translateY(-10px);
+  border-color: #4f46e5;
+}
+
+/* Efek Hover untuk Project Card */
+.project-card {
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+}

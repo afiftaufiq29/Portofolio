@@ -1,0 +1,155 @@
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+.about-card {
+  transition: all 0.3s ease;
+  background: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  border-color: #4f46e5;
+}
+
+.lanyard-container {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+  cursor: grab;
+  margin-left: 200px; /* Menggeser ke kanan */
+  margin-right: 0;
+  transform: translateX(50px);
+}
+
+.lanyard-container:active {
+  cursor: grabbing;
+}
+
+.lanyard-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.05s linear;
+  transform-origin: top center;
+}
+
+.lanyard-string {
+  position: absolute; /* Changed to fixed for full-page height */
+  top: -300px; /* Sesuaikan dengan tinggi tali agar menyentuh bagian atas card */
+  left: 50%;
+  width: 4px;
+  height: 1500px; /* Full viewport height */
+  background: linear-gradient(to bottom, #333, #555);
+  transform-origin: top center;
+  transform: scaleY(0.2); /* Initial scale */
+  transition: transform 0.3s ease;
+}
+
+.lanyard-id {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+}
+
+.lanyard-image {
+  width: 80%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+/* Smooth idle animation */
+@keyframes gentleSwing {
+  0%,
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  25% {
+    transform: rotate(1deg) translateX(3px);
+  }
+  75% {
+    transform: rotate(-1deg) translateX(-3px);
+  }
+}
+
+.lanyard-card:not(.dragging) {
+  animation: gentleSwing 4s ease-in-out infinite;
+}
+
+.lanyard-card {
+  animation: gentleSwing 4s ease-in-out infinite;
+}
+
+/* Dragging animation */
+.lanyard-container.dragging .lanyard-card {
+  transition: none;
+  animation: none;
+}
+
+.lanyard-container.dragging .lanyard-string {
+  transition: none;
+}
+
+/* Release animation */
+@keyframes releaseSwing {
+  0% {
+    transform: translate(var(--mouse-x), var(--mouse-y)) rotate(var(--rotation));
+  }
+  20% {
+    transform: translate(calc(var(--mouse-x) * 0.8), calc(var(--mouse-y) * 0.8))
+      rotate(calc(var(--rotation) * 0.7));
+  }
+  40% {
+    transform: translate(calc(var(--mouse-x) * 0.5), calc(var(--mouse-y) * 0.5))
+      rotate(calc(var(--rotation) * -0.3));
+  }
+  60% {
+    transform: translate(calc(var(--mouse-x) * 0.2), calc(var(--mouse-y) * 0.2))
+      rotate(calc(var(--rotation) * 0.2));
+  }
+  80% {
+    transform: translate(calc(var(--mouse-x) * 0.1), calc(var(--mouse-y) * 0.1))
+      rotate(calc(var(--rotation) * -0.1));
+  }
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
+.lanyard-container.released .lanyard-card {
+  animation: releaseSwing 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes stringFollow {
+  0% {
+    transform: scaleY(var(--string-stretch)) rotate(var(--string-angle));
+  }
+  100% {
+    transform: scaleY(1) rotate(0deg);
+  }
+}
+
+.lanyard-container.released .lanyard-string {
+  animation: stringFollow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
