@@ -1,55 +1,122 @@
 /* Responsive Design */
 
+/* Aturan Global untuk mencegah scroll horizontal */
+html,
+body {
+  overflow-x: hidden; /* Sembunyikan overflow horizontal */
+  width: 100%; /* Pastikan elemen ini selebar 100% viewport */
+  box-sizing: border-box; /* Pastikan padding/border tidak menambah lebar */
+}
+
+/* Semua elemen yang mungkin menyebabkan overflow */
+* {
+  box-sizing: border-box; /* Terapkan box-sizing ke semua elemen secara default */
+  /* Opsional: Jika masih ada masalah, bisa ditambahkan max-width: 100% */
+  /* max-width: 100%; /* Ini bisa sangat agresif, pakai jika sangat diperlukan */
+}
+
 /* Mobile (max-width: 768px) */
 @media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
-
-  .ml-0 {
+  /* Pastikan main content tidak memiliki margin yang mengganggu */
+  main {
     margin-left: 0 !important;
-  }
-
-  .mr-64 {
     margin-right: 0 !important;
+    width: 100%; /* Penting untuk responsivitas */
   }
 
+  /* Adjust padding for sections on mobile */
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box; /* Pastikan padding tidak menambah lebar total */
+    width: 100%; /* Penting: Pastikan section tidak memanjang keluar */
+  }
+
+  /* Force 1 column for grids on mobile */
   .grid-cols-2,
   .grid-cols-3 {
     grid-template-columns: 1fr !important;
   }
 
-  .px-20 {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-
+  /* Display mobile menu when active */
   .mobile-menu.active {
     display: flex;
+  }
+
+  /* Adjust lanyard container and card on mobile (pastikan sesuai about.css) */
+  /* Aturan ini bisa redundant jika sudah diatur di about.css, tapi biarkan untuk jaga-jaga */
+  .lanyard-container {
+    width: 90%; /* Sesuaikan lebar agar tidak overflow */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lanyard-card {
+    width: 100%; /* Lebar penuh dari container di mobile */
+  }
+
+  /* Adjust contact section grid on mobile */
+  #contact .grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Pastikan elemen hero tidak terlalu lebar (sudah di home.css, ini redundant tapi jaga-jaga) */
+  #home {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    width: 100%;
+  }
+
+  /* Sembunyikan mobile menu button jika mobile menu atau sidebar aktif */
+  .mobile-menu-button {
+    display: block; /* Default visible on mobile */
+  }
+  .mobile-menu.active ~ .mobile-menu-button,
+  .sidebar.active ~ .mobile-menu-button {
+    display: none;
   }
 }
 
 /* Tablet (max-width: 1024px) */
-@media (max-width: 1024px) {
-  .hero {
-    text-align: center;
-    padding: 3rem 1.5rem;
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* Adjust padding for sections on tablet */
+  section {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    box-sizing: border-box;
   }
 
-  .about-content {
-    flex-direction: column;
-    text-align: center;
+  /* Adjust hero section padding */
+  #home {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    box-sizing: border-box;
+  }
+
+  /* Ensure main content has no disturbing margins */
+  main {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Sembunyikan tombol mobile menu di tablet jika sidebar yang diutamakan */
+  .mobile-menu-button {
+    display: none;
   }
 }
 
 /* Desktop (min-width: 1025px) */
 @media (min-width: 1025px) {
-  .sidebar {
-    display: block;
+  /* Sidebar diatur sepenuhnya oleh sidebar.css */
+  /* Main content tidak memerlukan margin tambahan karena sidebar pop-up */
+  main {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
-  .content {
-    max-width: 1200px;
-    margin: 0 auto;
+  /* Sembunyikan tombol mobile menu dan mobile menu itu sendiri di desktop */
+  .mobile-menu-button,
+  .mobile-menu {
+    display: none !important;
   }
 }

@@ -1,5 +1,5 @@
 .mobile-menu {
-  display: none;
+  display: none; /* Sembunyikan secara default */
   position: fixed;
   top: 0;
   left: 0;
@@ -7,10 +7,20 @@
   height: 100%;
   background: rgba(17, 24, 39, 0.95);
   z-index: 50;
+  flex-direction: column; /* Ensure vertical alignment */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
 }
 
 @media (max-width: 768px) {
   .mobile-menu.active {
-    display: flex;
+    display: flex; /* Tampilkan hanya di mobile saat aktif */
+  }
+}
+
+/* Sembunyikan mobile menu di desktop */
+@media (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
   }
 }

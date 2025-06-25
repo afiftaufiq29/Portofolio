@@ -9,3 +9,10 @@
   transform: translateY(-10px);
   border-color: #4f46e5;
 }
+
+/* Add responsiveness for skill cards */
+@media (max-width: 768px) {
+  #skills .grid {
+    grid-template-columns: 1fr; /* Stack skill cards vertically on small screens */
+  }
+}

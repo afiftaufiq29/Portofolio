@@ -27,7 +27,9 @@
   padding-left: 5rem;
   padding-right: 5rem;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Pastikan tidak ada overflow horizontal dari elemen di dalam */
+  box-sizing: border-box; /* SANGAT PENTING: padding tidak menambah lebar */
+  width: 100vw; /* Pastikan selalu selebar viewport */
 }
 
 /* Light effect with bouncing animation */
@@ -76,6 +78,12 @@
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
+  #home {
+    padding-left: 1rem !important; /* Adjust padding for smaller screens */
+    padding-right: 1rem !important;
+    width: 100%; /* Pastikan 100% dari parent (body) */
+  }
+
   #home::before {
     width: 120px;
     height: 120px;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Afif Taufiqurrohman - Portfolio</title>
+    <link rel="icon" href="assets/images/clock.png" type="image/png" />
     <link rel="stylesheet" href="assets/css/home.css" />
     <link rel="stylesheet" href="assets/css/mobile-menu.css" />
     <link rel="stylesheet" href="assets/css/sidebar.css" />
@@ -42,89 +43,124 @@
       property="og:description"
       content="Full Stack Developer & Software Engineer"
     />
-    <meta property="og:image" content="[URL to your profile image]" />
+    <meta
+      property="og:image"
+      content="https://www.facebook.com/help/163248423739693/"
+    />
     <link rel="canonical" href="[Your website URL]" />
   </head>
 
   <body class="bg-gray-900 text-white">
-    <!-- Mobile Menu Button -->
     <button
-      class="fixed top-4 right-4 z-50 md:hidden bg-gray-800 p-2 rounded-lg"
+      class="fixed top-4 right-4 z-50 md:hidden bg-gray-800 p-2 rounded-lg mobile-menu-button"
       onclick="toggleMobileMenu()"
     >
       <i class="fas fa-bars text-2xl"></i>
     </button>
 
-    <!-- Mobile Menu -->
     <div class="mobile-menu items-center justify-center">
       <div class="text-center space-y-8">
         <a
           href="#home"
           class="block text-2xl hover:text-purple-400 transition-colors"
+          onclick="toggleMobileMenu()"
           >Home</a
         >
         <a
           href="#about"
           class="block text-2xl hover:text-purple-400 transition-colors"
+          onclick="toggleMobileMenu()"
           >About</a
         >
         <a
           href="#skills"
           class="block text-2xl hover:text-purple-400 transition-colors"
+          onclick="toggleMobileMenu()"
           >Skills</a
         >
         <a
           href="#projects"
           class="block text-2xl hover:text-purple-400 transition-colors"
+          onclick="toggleMobileMenu()"
           >Projects</a
         >
         <a
           href="#contact"
           class="block text-2xl hover:text-purple-400 transition-colors"
+          onclick="toggleMobileMenu()"
           >Contact</a
         >
       </div>
     </div>
 
-    <!-- Sidebar -->
-    <nav
-      class="sidebar fixed top-0 right-0 h-screen w-64 p-6 flex flex-col justify-between"
-    >
+    <nav class="sidebar">
       <div class="space-y-6">
-        <a href="#home" class="block hover:text-purple-400 transition-colors"
+        <a
+          href="#home"
+          class="block hover:text-purple-400 transition-colors"
+          onclick="closeSidebarFromLink()"
           >Home</a
         >
-        <a href="#about" class="block hover:text-purple-400 transition-colors"
+        <a
+          href="#about"
+          class="block hover:text-purple-400 transition-colors"
+          onclick="closeSidebarFromLink()"
           >About</a
         >
-        <a href="#skills" class="block hover:text-purple-400 transition-colors"
+        <a
+          href="#skills"
+          class="block hover:text-purple-400 transition-colors"
+          onclick="closeSidebarFromLink()"
           >Skills</a
         >
         <a
           href="#projects"
           class="block hover:text-purple-400 transition-colors"
+          onclick="closeSidebarFromLink()"
           >Projects</a
         >
-        <a href="#contact" class="block hover:text-purple-400 transition-colors"
+        <a
+          href="#contact"
+          class="block hover:text-purple-400 transition-colors"
+          onclick="closeSidebarFromLink()"
           >Contact</a
         >
       </div>
       <div class="flex space-x-4">
-        <a href="#" class="hover:text-purple-400"
+        <a
+          href="https://github.com/afiftaufiq29"
+          target="_blank"
+          class="hover:text-purple-400"
           ><i class="fab fa-github text-2xl"></i
         ></a>
-        <a href="#" class="hover:text-purple-400"
+        <a
+          href="https://www.linkedin.com/in/afif-taufiqurrohman-020835271/"
+          target="_blank"
+          class="hover:text-purple-400"
           ><i class="fab fa-linkedin text-2xl"></i
         ></a>
-        <a href="#" class="hover:text-purple-400"
-          ><i class="fab fa-twitter text-2xl"></i
+        <a
+          href="https://www.instagram.com/afiftaufiq_/"
+          target="_blank"
+          class="hover:text-purple-400"
+          ><i class="fab fa-instagram text-2xl"></i
+        ></a>
+        <a
+          href="https://wa.me/6287780513606"
+          target="_blank"
+          class="hover:text-purple-400"
+          ><i class="fab fa-whatsapp text-2xl"></i
         ></a>
       </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="ml-0 mr-64 md:mr-0">
-      <!-- Hero Section -->
+    <button class="sidebar-toggle">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+
+    <div class="sidebar-overlay"></div>
+
+    <main class="relative z-10">
       <section
         id="home"
         class="min-h-screen flex items-center px-20 animate-float w-full"
@@ -136,20 +172,13 @@
           <p class="text-xl text-gray-400 max-w-2xl mb-8">
             Full Stack Developer & Software Engineer
           </p>
-          <a
-            href="#contact"
-            class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full transition-colors"
-          >
-            Get in touch
-          </a>
         </div>
       </section>
-      <!-- About Section -->
-      <section id="about" class="min-h-screen flex items-center px-20">
+      <section id="about" class="min-h-screen flex items-center px-20 py-20">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-20 w-full">
-          <!-- Lanyard Card -->
           <div class="lanyard-container" data-aos="fade-right">
             <div class="lanyard-card">
+              <div class="lanyard-string"></div>
               <div class="lanyard-id">
                 <img
                   src="assets/images/afif.jpg"
@@ -159,46 +188,50 @@
                 <h3 class="text-gray-600 text-xl font-bold">
                   Afif Taufiqurrohman
                 </h3>
-                <p class="text-gray-600">Developer</p>
+                <p class="text-gray-600">Full Stack Developer</p>
               </div>
             </div>
           </div>
 
-          <!-- Teks About -->
           <div
             data-aos="fade-left"
             class="space-y-6 flex flex-col justify-center"
           >
-            <h2 class="text-4xl font-bold gradient-text">About Me</h2>
+            <h2 class="text-4xl font-bold gradient-text">Tentang Saya</h2>
             <p class="text-gray-400 leading-relaxed">
-              A passionate developer with expertise in multiple programming
-              languages and frameworks. I love creating beautiful and functional
-              applications that solve real-world problems.
+              Haloo semuanyaa!! Perkenalkan aku Afif Taufiqurrohman dari jurusan
+              S1 Teknologi Informasi angkatan 2022. Saya masih menjalankan
+              perkuliahan di Telkom University.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+              <!-- Card Experience -->
               <div class="p-4 bg-gray-800 rounded-lg about-card">
-                <div class="left-light"></div>
-                <!-- Garis kiri -->
-                <div class="right-light"></div>
-                <!-- Garis kanan -->
+                <div class="neon-border"></div>
+                <!-- Tambahkan ini -->
                 <h3 class="font-bold mb-2">Experience</h3>
                 <p class="text-gray-400">5+ Years</p>
               </div>
+
+              <!-- Card Projects -->
               <div class="p-4 bg-gray-800 rounded-lg about-card">
-                <div class="left-light"></div>
-                <div class="right-light"></div>
+                <div class="neon-border"></div>
+                <!-- Tambahkan ini -->
                 <h3 class="font-bold mb-2">Projects</h3>
                 <p class="text-gray-400">50+ Completed</p>
               </div>
+
+              <!-- Card Skills -->
               <div class="p-4 bg-gray-800 rounded-lg about-card">
-                <div class="left-light"></div>
-                <div class="right-light"></div>
+                <div class="neon-border"></div>
+                <!-- Tambahkan ini -->
                 <h3 class="font-bold mb-2">Skills</h3>
-                <p class="text-gray-400">HTML, CSS, JS, React, Node.js</p>
+                <p class="text-gray-400">HTML, CSS, JS, Dart, Python</p>
               </div>
+
+              <!-- Card Education -->
               <div class="p-4 bg-gray-800 rounded-lg about-card">
-                <div class="left-light"></div>
-                <div class="right-light"></div>
+                <div class="neon-border"></div>
+                <!-- Tambahkan ini -->
                 <h3 class="font-bold mb-2">Education</h3>
                 <p class="text-gray-400">Computer Science Degree</p>
               </div>
@@ -207,12 +240,11 @@
         </div>
       </section>
 
-      <!-- Skills Section -->
       <section id="skills" class="min-h-screen px-20 py-20">
         <h2 class="text-4xl font-bold gradient-text mb-20" data-aos="fade-up">
           My Skills
         </h2>
-        <div class="grid grid-cols-3 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div class="skill-card p-6 rounded-xl" data-aos="zoom-in">
             <i class="fas fa-code text-4xl mb-4 text-purple-400"></i>
             <h3 class="text-xl font-bold mb-4">Frontend</h3>
@@ -254,18 +286,17 @@
         </div>
       </section>
 
-      <!-- Projects Section -->
       <section id="projects" class="min-h-screen px-20 py-20">
         <h2 class="text-4xl font-bold gradient-text mb-20" data-aos="fade-up">
           Latest Projects
         </h2>
-        <div class="grid grid-cols-2 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div
             class="project-card bg-gray-800 rounded-xl overflow-hidden"
             data-aos="fade-up"
           >
             <img
-              src="/api/placeholder/600/300"
+              src="assets/images/project1.jpg"
               alt="Project 1"
               class="w-full h-48 object-cover"
             />
@@ -290,7 +321,61 @@
             data-aos-delay="100"
           >
             <img
-              src="/api/placeholder/600/300"
+              src="assets/images/project2.jpg"
+              alt="Project 2"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Social Media App</h3>
+              <p class="text-gray-400 mb-4">
+                Real-time social platform with modern features
+              </p>
+              <div class="flex space-x-2">
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >Next.js</span
+                >
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >MongoDB</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="project-card bg-gray-800 rounded-xl overflow-hidden"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <img
+              src="assets/images/project3.jpg"
+              alt="Project 3"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Portfolio Website</h3>
+              <p class="text-gray-400 mb-4">
+                This very portfolio website, showcasing modern web design.
+              </p>
+              <div class="flex space-x-2">
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >HTML</span
+                >
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >CSS</span
+                >
+                <span class="px-3 py-1 bg-purple-500 rounded-full text-sm"
+                  >JavaScript</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="project-card bg-gray-800 rounded-xl overflow-hidden"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <img
+              src="assets/images/project4.jpg"
               alt="Project 2"
               class="w-full h-48 object-cover"
             />
@@ -312,12 +397,8 @@
         </div>
       </section>
 
-      <!-- Contact Section -->
       <section id="contact" class="min-h-screen px-20 py-20">
-        <h2 class="text-4xl font-bold gradient-text mb-20" data-aos="fade-up">
-          Get in Touch
-        </h2>
-        <div class="grid grid-cols-2 gap-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
           <div data-aos="fade-right">
             <form class="space-y-6">
               <div>
@@ -349,43 +430,48 @@
           </div>
           <div data-aos="fade-left" class="space-y-8">
             <div>
-              <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+              <h3 class="text-xl font-bold mb-4">Informasi Kontak</h3>
               <p class="text-gray-400">
-                <i class="fas fa-envelope mr-2"></i> email@example.com
+                <i class="fas fa-envelope mr-2"></i> afiftaufiq2003@gmail.com
               </p>
               <p class="text-gray-400">
-                <i class="fas fa-phone mr-2"></i> +1234567890
+                <i class="fas fa-phone mr-2"></i> +6287780513606
               </p>
               <p class="text-gray-400">
-                <i class="fas fa-map-marker-alt mr-2"></i> Your Location
+                <i class="fas fa-map-marker-alt mr-2"></i> Ketapang, Kalimantan
+                Barat
               </p>
             </div>
             <div class="mt-12">
               <h3 class="text-xl font-bold mb-4">Follow Me</h3>
               <div class="flex space-x-6">
                 <a
-                  href="#"
+                  href="https://github.com/afiftaufiq29"
+                  target="_blank"
                   class="text-3xl hover:text-purple-400 transition-colors"
                 >
                   <i class="fab fa-github"></i>
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/afif-taufiqurrohman-020835271/"
+                  target="_blank"
                   class="text-3xl hover:text-purple-400 transition-colors"
                 >
                   <i class="fab fa-linkedin"></i>
                 </a>
                 <a
-                  href="#"
-                  class="text-3xl hover:text-purple-400 transition-colors"
-                >
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a
-                  href="#"
+                  href="https://www.instagram.com/afiftaufiq_/"
+                  target="_blank"
                   class="text-3xl hover:text-purple-400 transition-colors"
                 >
                   <i class="fab fa-instagram"></i>
+                </a>
+                <a
+                  href="https://wa.me/6287780513606"
+                  target="_blank"
+                  class="text-3xl hover:text-purple-400 transition-colors"
+                >
+                  <i class="fab fa-whatsapp"></i>
                 </a>
               </div>
             </div>
@@ -393,7 +479,6 @@
         </div>
       </section>
 
-      <!-- Footer -->
       <footer class="bg-gray-800 py-8 px-20">
         <div
           class="container mx-auto flex flex-col md:flex-row justify-between items-center"
@@ -411,23 +496,6 @@
           </div>
         </div>
       </footer>
-      <!-- Tombol Toggle Sidebar -->
-      <div class="sidebar"></div>
-      <button class="sidebar-toggle">
-        <i class="fa-solid fa-chess-king"></i>
-      </button>
-
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <div class="sidebar-overlay"></div>
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
     </main>
 
     <script
@@ -452,10 +520,25 @@
         mirror: true,
       });
 
-      // Mobile menu toggle
+      // Fungsi untuk toggle Mobile Menu (jika masih digunakan)
       function toggleMobileMenu() {
         const mobileMenu = document.querySelector(".mobile-menu");
         mobileMenu.classList.toggle("active");
+        // Pastikan sidebar tertutup jika mobile menu dibuka
+        const sidebar = document.querySelector(".sidebar");
+        const overlay = document.querySelector(".sidebar-overlay");
+        if (sidebar.classList.contains("active")) {
+          sidebar.classList.remove("active");
+          overlay.style.display = "none";
+        }
+      }
+
+      // Fungsi untuk menutup sidebar saat link di dalamnya diklik
+      function closeSidebarFromLink() {
+        const sidebar = document.querySelector(".sidebar");
+        const overlay = document.querySelector(".sidebar-overlay");
+        sidebar.classList.remove("active");
+        overlay.style.display = "none";
       }
 
       // Smooth scroll for anchor links
@@ -464,34 +547,50 @@
           e.preventDefault();
           const target = document.querySelector(this.getAttribute("href"));
           target.scrollIntoView({ behavior: "smooth" });
+          // Tutup mobile menu jika terbuka
           if (
             document.querySelector(".mobile-menu").classList.contains("active")
           ) {
             document.querySelector(".mobile-menu").classList.remove("active");
           }
+          // Tutup sidebar juga jika terbuka (jika link di luar sidebar)
+          const sidebar = document.querySelector(".sidebar");
+          const overlay = document.querySelector(".sidebar-overlay");
+          if (sidebar.classList.contains("active")) {
+            sidebar.classList.remove("active");
+            overlay.style.display = "none";
+          }
         });
       });
 
-      // Sidebar toggle
+      // Logika Sidebar Toggle (Satu tombol untuk semua)
       document.addEventListener("DOMContentLoaded", function () {
         const sidebar = document.querySelector(".sidebar");
         const toggleBtn = document.querySelector(".sidebar-toggle");
         const overlay = document.querySelector(".sidebar-overlay");
+        const mobileMenu = document.querySelector(".mobile-menu"); // Dapatkan referensi mobile menu
+        const mobileMenuButton = document.querySelector(".mobile-menu-button"); // Dapatkan referensi tombol mobile menu
 
         function toggleSidebar() {
           sidebar.classList.toggle("active");
           overlay.style.display = sidebar.classList.contains("active")
             ? "block"
             : "none";
+
+          // Pastikan mobile menu tertutup saat sidebar dibuka/ditutup
+          if (mobileMenu.classList.contains("active")) {
+            mobileMenu.classList.remove("active");
+          }
+          // Kontrol visibilitas tombol mobile menu saat sidebar aktif/nonaktif
           if (sidebar.classList.contains("active")) {
-            toggleBtn.style.left = "260px";
+            if (mobileMenuButton) mobileMenuButton.style.display = "none";
           } else {
-            toggleBtn.style.left = "25px";
+            if (mobileMenuButton) mobileMenuButton.style.display = "block";
           }
         }
 
         toggleBtn.addEventListener("click", toggleSidebar);
-        overlay.addEventListener("click", toggleSidebar);
+        overlay.addEventListener("click", toggleSidebar); // Menutup sidebar saat overlay diklik
 
         document.addEventListener("keydown", (e) => {
           if (e.key === "Escape" && sidebar.classList.contains("active")) {
@@ -499,16 +598,39 @@
           }
         });
 
-        window.addEventListener("resize", () => {
-          if (
-            window.innerWidth <= 768 &&
-            sidebar.classList.contains("active")
-          ) {
-            toggleBtn.style.left = "calc(100% - 65px)";
-          }
+        // Event listener untuk menutup sidebar ketika link di dalamnya diklik
+        sidebar.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", closeSidebarFromLink);
         });
+
+        // Initial state on load and resize
+        const handleResize = () => {
+          if (window.innerWidth > 768) {
+            // Untuk desktop
+            if (mobileMenuButton) mobileMenuButton.style.display = "none"; // Sembunyikan tombol mobile menu
+            sidebar.classList.remove("active"); // Pastikan sidebar tertutup
+            overlay.style.display = "none"; // Sembunyikan overlay
+          } else {
+            // Untuk mobile/tablet
+            if (mobileMenuButton) {
+              // Tampilkan tombol mobile menu HANYA jika mobile menu dan sidebar tidak aktif
+              if (
+                !mobileMenu.classList.contains("active") &&
+                !sidebar.classList.contains("active")
+              ) {
+                mobileMenuButton.style.display = "block";
+              } else {
+                mobileMenuButton.style.display = "none";
+              }
+            }
+          }
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Panggil saat halaman pertama kali dimuat
       });
 
+      // Lanyard script (tidak ada perubahan signifikan yang mempengaruhi responsivitas)
       document.addEventListener("DOMContentLoaded", function () {
         const container = document.querySelector(".lanyard-container");
         const card = document.querySelector(".lanyard-card");

@@ -10,3 +10,10 @@
   border: 1px solid #ccc;
   margin-bottom: 10px;
 }
+
+/* Add responsiveness for contact section */
+@media (max-width: 768px) {
+  #contact .grid-cols-2 {
+    grid-template-columns: 1fr; /* Stack contact form and info vertically on small screens */
+  }
+}

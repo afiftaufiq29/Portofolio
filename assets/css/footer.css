@@ -4,3 +4,15 @@
   background: #1f2937;
   color: white;
 }
+
+/* Add responsiveness for footer */
+@media (max-width: 768px) {
+  .footer .container {
+    flex-direction: column; /* Stack items vertically on mobile */
+    align-items: center;
+  }
+
+  .footer .mt-4 {
+    margin-top: 1rem; /* Adjust margin for mobile */
+  }
+}

@@ -4,7 +4,23 @@
   height: 600px; /* Increase container height */
   perspective: 1000px;
   cursor: grab;
-  margin-left: 200px;
+  /* margin-left: 200px; */ /* Hapus atau jadikan komentar */
+  display: flex; /* Tambahkan flexbox untuk centering */
+  justify-content: center; /* Pusatkan secara horizontal */
+  align-items: center; /* Pusatkan secara vertikal */
+  /* Jika ingin geser sedikit ke kiri, bisa pakai ini: */
+  /* margin-right: 20px; */ /* Contoh, sesuaikan nilai */
+}
+
+@media (max-width: 768px) {
+  .lanyard-container {
+    width: 100%; /* Full width on smaller screens */
+    height: 400px; /* Adjust height for mobile */
+    margin-left: 0; /* Remove left margin */
+    /* display: flex; */ /* Sudah ada di atas, tidak perlu duplikasi */
+    /* justify-content: center; */ /* Sudah ada di atas, tidak perlu duplikasi */
+    /* align-items: center; */ /* Sudah ada di atas, tidak perlu duplikasi */
+  }
 }
 
 .lanyard-container:active {
@@ -12,14 +28,26 @@
 }
 
 .lanyard-card {
-  position: absolute;
-  top: 0;
-  left: 0;
+  /* position: absolute; */ /* Hapus ini agar flexbox bisa bekerja */
+  /* top: 0; */ /* Hapus jika tidak diperlukan lagi */
+  /* left: 0; */ /* Hapus jika tidak diperlukan lagi */
   width: 80%; /* Make the card occupy more space within the container */
   height: auto;
   transform-style: preserve-3d;
   transition: transform 0.05s linear;
   transform-origin: top center;
+  /* Tambahan: Pastikan margin vertikal tidak mendorong keluar */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .lanyard-card {
+    width: 70%; /* Adjust card size on mobile */
+    position: relative; /* Make it relative to container for centering */
+    top: auto;
+    left: auto;
+  }
 }
 
 .lanyard-string {
@@ -31,6 +59,13 @@
   transform-origin: top center;
   transform: scaleY(1) rotate(0deg);
   transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .lanyard-string {
+    top: -200px; /* Adjust string length for mobile card */
+    width: 4px;
+  }
 }
 
 .lanyard-id {
@@ -202,4 +237,82 @@
   100% {
     transform: translateY(100%);
   }
+}
+
+/* Penambahan untuk mengatasi teks terpotong */
+/* Diasumsikan gradient-text ada di file CSS terpisah atau global. Jika tidak, tambahkan di sini */
+.gradient-text {
+  /* ... kode gradient-text yang sudah ada ... */
+  line-height: 1.2; /* Menambah tinggi baris sedikit, sesuaikan jika perlu */
+  padding-bottom: 5px; /* Memberi ruang di bawah teks, sesuaikan jika perlu */
+  /* Optional: Untuk memastikan tidak ada overflow */
+  /* overflow: visible; */
+}
+
+/* Pastikan section about memiliki ruang yang cukup */
+#about {
+  padding-top: 80px; /* Sesuaikan jika perlu */
+  padding-bottom: 80px; /* Sesuaikan jika perlu */
+  /* Jika masih terpotong, coba tambahkan min-height yang lebih besar atau hapus min-height jika ada */
+  /* min-height: 100vh; */ /* Jika ada, bisa dipertimbangkan untuk disesuaikan */
+}
+
+/* ANIMASI NEON BORDER */
+.neon-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.neon-border::before {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: conic-gradient(
+    transparent,
+    transparent,
+    transparent,
+    #4f46e5,
+    transparent,
+    transparent,
+    transparent,
+    transparent
+  );
+  animation: rotateNeon 4s linear infinite;
+}
+
+@keyframes rotateNeon {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.neon-border::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #1f2937;
+  border-radius: 0.75rem;
+  z-index: 1;
+}
+
+/* Efek glow */
+.about-card:hover .neon-border::before {
+  filter: blur(10px);
+  opacity: 1;
+}
+
+/* Perbaikan posisi konten */
+.about-card > *:not(.neon-border) {
+  position: relative;
+  z-index: 2;
 }

@@ -2,28 +2,32 @@
 .sidebar {
   position: fixed;
   top: 0;
-  left: -300px;
+  right: -300px; /* Sembunyikan sidebar di luar layar kanan */
   width: 300px;
   height: 100%;
   background: rgba(31, 41, 55, 0.95);
   backdrop-filter: blur(15px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Animasi slide */
   padding: 30px 20px;
   z-index: 1000;
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0 20px 20px 0;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3); /* Bayangan di kiri sidebar */
+  border-left: 1px solid rgba(255, 255, 255, 0.1); /* Garis di kiri */
+  border-radius: 20px 0 0 20px; /* Sudut melengkung di kiri */
+  display: flex; /* Gunakan flexbox untuk layout internal */
+  flex-direction: column;
+  justify-content: space-between; /* Dorong konten ke atas dan bawah */
 }
 
 .sidebar.active {
-  left: 0;
+  right: 0; /* Tampilkan sidebar saat aktif */
 }
 
 /* Tombol Toggle Modern */
+/* Tombol ini akan mengontrol sidebar */
 .sidebar-toggle {
   position: fixed;
   top: 25px;
-  left: 25px;
+  right: 25px; /* Posisikan tombol di kanan atas */
   background: #4f46e5;
   color: white;
   border: none;
@@ -33,7 +37,7 @@
   z-index: 1100;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  display: flex;
+  display: flex; /* Gunakan flex untuk icon */
   align-items: center;
 }
 
@@ -43,26 +47,13 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Icon Hamburger Animasi */
-.sidebar-toggle span {
-  display: block;
-  width: 25px;
-  height: 2px;
-  background: white;
-  margin: 5px 0;
-  transition: all 0.3s ease;
+/* Icon Hamburger Animasi (jika ingin menggunakan icon hamburger) */
+.sidebar-toggle i.fa-bars {
+  transition: transform 0.3s ease;
 }
 
-.sidebar.active .sidebar-toggle span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.sidebar.active .sidebar-toggle span:nth-child(2) {
-  opacity: 0;
-}
-
-.sidebar.active .sidebar-toggle span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+.sidebar.active .sidebar-toggle i.fa-bars {
+  transform: rotate(90deg); /* Contoh rotasi icon saat sidebar terbuka */
 }
 
 /* Styling Link Modern */
@@ -91,43 +82,22 @@
 .sidebar ul li a:hover {
   color: #fff;
   background: rgba(79, 70, 229, 0.15);
-  transform: translateX(10px);
+  transform: translateX(-10px); /* Geser ke kiri saat hover */
 }
 
 .sidebar ul li a::before {
   content: "";
   position: absolute;
-  left: 0;
+  right: 0; /* Garis di kanan link */
   width: 3px;
   height: 0%;
   background: #6366f1;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px 0 0 5px; /* Sudut melengkung di kanan */
   transition: all 0.3s ease;
 }
 
 .sidebar ul li a:hover::before {
   height: 60%;
-}
-
-/* Responsif untuk Mobile */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 85%;
-    left: -100%;
-    border-radius: 0;
-    padding: 25px 15px;
-  }
-
-  .sidebar-toggle {
-    top: 15px;
-    left: 15px;
-    padding: 10px;
-  }
-
-  .sidebar ul li a {
-    font-size: 1rem;
-    padding: 10px 15px;
-  }
 }
 
 /* Overlay untuk Background */
@@ -145,4 +115,29 @@
 
 .sidebar.active + .sidebar-overlay {
   display: block;
+}
+
+/* Media query untuk mobile (jika perlu penyesuaian khusus mobile) */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 85%; /* Lebih lebar di mobile */
+    right: -85%; /* Sembunyikan lebih jauh */
+    border-radius: 0;
+    padding: 25px 15px;
+  }
+
+  .sidebar.active {
+    right: 0;
+  }
+
+  .sidebar-toggle {
+    top: 15px;
+    right: 15px; /* Posisikan tombol di kanan atas mobile */
+    padding: 10px;
+  }
+
+  .sidebar ul li a {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
 }

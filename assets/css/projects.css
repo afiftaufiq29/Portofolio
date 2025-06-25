@@ -5,3 +5,10 @@
 .project-card:hover {
   transform: scale(1.05);
 }
+
+/* Add responsiveness for project cards */
+@media (max-width: 768px) {
+  #projects .grid {
+    grid-template-columns: 1fr; /* Stack projects vertically on small screens */
+  }
+}
