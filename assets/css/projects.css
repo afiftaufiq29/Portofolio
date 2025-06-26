@@ -29,8 +29,7 @@
   opacity: 0;
   visibility: hidden;
   /* Transisi untuk overlay: Lebih lambat agar blur terasa muncul perlahan */
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.5s ease, visibility 0.5s ease; /* Durasi asli */
 }
 
 .project-overlay.active {
@@ -38,14 +37,11 @@
   visibility: visible;
 }
 
-/* Transisi keluar overlay: Sedikit lebih cepat setelah popup mulai menghilang */
+/* Transisi keluar overlay: Cukup ikuti popup */
 .project-overlay.closing {
   opacity: 0;
   visibility: hidden;
-  /* Durasi disesuaikan agar overlay menghilang setelah popup mulai geser */
-  /* Delay dikurangi agar overlay menghilang lebih dekat dengan pergerakan popup */
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
-    visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  transition: opacity 0.5s ease, visibility 0.5s ease; /* Kembali ke durasi asli */
 }
 
 .project-popup {
@@ -59,9 +55,8 @@
   transform: translateX(100vw);
   opacity: 0; /* Awalnya tidak terlihat */
 
-  /* Transisi untuk popup: durasi panjang, cubic-bezier yang halus */
-  /* transform akan bergerak dulu, opacity menyusul setelah sedikit delay */
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+  /* Transisi untuk popup MASUK: durasi medium, cubic-bezier ease-out */
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
     opacity 0.5s ease-in-out;
 
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
@@ -72,14 +67,15 @@
   text-align: center;
   max-height: 90vh; /* Batasi tinggi popup agar bisa discroll jika konten banyak */
   overflow-y: auto; /* Aktifkan scroll jika konten melebihi tinggi */
+  will-change: transform, opacity; /* Optimalisasi performa animasi */
 }
 
 .project-overlay.active .project-popup {
   /* Animasi MASUK: Bergeser ke tengah layar */
   transform: translateX(0); /* Bergerak ke posisi normal */
   opacity: 1; /* Menjadi terlihat */
-  /* Opacity dengan delay agar tampak muncul setelah geser */
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+  /* Opacity dengan delay agar tampak muncul setelah bergerak */
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
     opacity 0.5s ease-in-out 0.1s;
 }
 
@@ -87,8 +83,8 @@
   /* Animasi KELUAR: Bergeser ke kiri melewati layar dan menghilang */
   transform: translateX(-100vw); /* Bergerak ke luar layar di kiri */
   opacity: 0; /* Menghilang */
-  /* Transisi keluar: Durasi sama dengan masuk, tapi dengan ease-in atau cubic-bezier yang cocok */
-  transition: transform 0.7s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+  /* Transisi KELUAR: Durasi medium, cubic-bezier ease-in */
+  transition: transform 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53),
     opacity 0.5s ease-in-out;
 }
 
@@ -120,7 +116,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* --- Gaya untuk Slider Gambar (Diperbarui agar Gambar Tidak Terpotong & Memenuhi Card) --- */
+/* --- Gaya untuk Slider Gambar --- */
 .popup-slider-container {
   position: relative;
   width: 100%;
@@ -175,7 +171,7 @@
 .slider-nav-btn:hover {
   color: #a78bfa; /* Warna UNGU saat hover */
   opacity: 1;
-  transform: translateY(-50%) scale(1.1); /* Efek membesar saat hover */
+  transform: translateY(-50%) scale(1.1);
 }
 
 .slider-nav-btn.prev {
@@ -194,13 +190,8 @@
   display: flex;
   gap: 0.6rem; /* Jarak antar dot */
   z-index: 10;
-  padding: 0.2rem 0.5rem; /* Padding agar dots tidak terlalu mepet */
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.3
-  ); /* Background dots agar lebih terlihat */
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 1rem;
 }
 
@@ -214,8 +205,8 @@
 }
 
 .slider-dot.active {
-  background-color: #a78bfa; /* Warna ungu untuk dot aktif */
-  transform: scale(1.2); /* Dot aktif sedikit membesar */
+  background-color: #a78bfa;
+  transform: scale(1.2);
 }
 
 .popup-title {
@@ -265,8 +256,8 @@
   }
 
   .popup-slider-container {
-    height: auto; /* Biarkan tinggi menyesuaikan di mobile */
-    max-height: 300px; /* Batas tinggi maksimal di mobile */
+    height: auto;
+    max-height: 300px;
     max-width: none;
     display: flex;
     align-items: center;
@@ -305,15 +296,25 @@
   }
 }
 
-/* Animasi tambahan untuk clone card */
-.project-card-clone {
+/* Hapus aturan .project-card-clone karena tidak lagi digunakan */
+/* Animasi tambahan untuk clone card (tidak lagi dipakai untuk efek terbang) */
+/* .project-card-clone {
   position: fixed;
-  z-index: 1005; /* Di atas overlay yang memudar */
+  z-index: 1005;
   top: 0;
   left: 0;
-  pointer-events: none; /* Tidak bisa diklik saat animasi */
-  opacity: 0; /* Awalnya tersembunyi */
-  transform-origin: top left; /* Penting untuk scaling dari sudut atas kiri */
-  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1),
-    opacity 0.6s ease-out; /* Smooth transition */
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: top left;
+  transition: transform 1.0s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+    opacity 0.7s ease-out;
+  will-change: transform, opacity;
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden;
 }
+
+.project-card-clone > * {
+    opacity: 1 !important;
+    transition: opacity 0s !important;
+} */

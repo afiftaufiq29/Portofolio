@@ -14,7 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentSlideIndex = 0;
   let currentProjectImages = []; // Untuk menyimpan gambar proyek yang sedang aktif
 
-  // Data proyek (pastikan ada 3 gambar untuk setiap proyek)
+  // Variabel untuk menyimpan data card asli yang diklik (tidak lagi dipakai untuk clone, tapi untuk menampilkan kembali)
+  let originalCardElement = null;
+
+  // Data proyek (pastikan ada gambar untuk setiap proyek)
   const projectsData = {
     project1: {
       images: [
@@ -93,6 +96,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const project = projectsData?.[projectId];
 
       if (project) {
+        // Simpan referensi card asli untuk ditampilkan kembali nanti
+        originalCardElement = this;
+
+        // Sembunyikan card asli
+        originalCardElement.style.opacity = "0";
+        originalCardElement.style.pointerEvents = "none"; // Nonaktifkan klik
+
         currentProjectImages = project.images;
         currentSlideIndex = 0; // Reset ke gambar pertama setiap kali popup dibuka
 
@@ -102,7 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
           const img = document.createElement("img");
           img.src = imageSrc;
           img.alt = project.title;
-          // Tidak perlu lagi popup-image-item, styling langsung di popup-slider-wrapper img
           popupSliderWrapper.appendChild(img);
         });
 
@@ -122,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
           popupTags.appendChild(span);
         });
 
+        // Hapus kelas 'closing' sebelum menambahkan 'active'
         projectOverlay.classList.remove("closing");
         projectOverlay.classList.add("active");
         document.body.style.overflow = "hidden";
@@ -147,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
   closePopupBtn.addEventListener("click", closePopup);
 
   projectOverlay.addEventListener("click", function (e) {
+    // Pastikan klik terjadi langsung pada overlay, bukan pada popup
     if (e.target === projectOverlay) {
       closePopup();
     }
@@ -160,11 +171,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function closePopup() {
     projectOverlay.classList.remove("active");
-    projectOverlay.classList.add("closing");
-    document.body.style.overflow = "auto";
+    projectOverlay.classList.add("closing"); // Memicu animasi keluar di CSS
+    document.body.style.overflow = "auto"; // Mengembalikan scroll pada body
 
+    // Setelah animasi keluar popup selesai, tampilkan kembali card asli
+    // Durasi animasi popup keluar adalah 0.6s (sesuai CSS .project-popup)
     setTimeout(() => {
-      projectOverlay.classList.remove("closing");
-    }, 400);
+      if (originalCardElement) {
+        originalCardElement.style.opacity = "1"; // Tampilkan kembali card asli
+        originalCardElement.style.pointerEvents = "auto"; // Aktifkan kembali klik
+        originalCardElement = null; // Reset variabel
+      }
+      projectOverlay.classList.remove("closing"); // Akhirnya sembunyikan overlay
+    }, 600); // Sesuaikan dengan durasi transisi popup keluar (0.6s = 600ms)
   }
 });
