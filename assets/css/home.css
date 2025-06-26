@@ -1,3 +1,5 @@
+/* assets/css/home.css */
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -18,18 +20,88 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* --- Global Body & HTML Settings --- */
+/* assets/css/home.css */
+
+/* ... (Kode yang tidak berubah) ... */
+
+/* --- Global Body & HTML Settings --- */
+html {
+  overflow-x: hidden; /* Tetap pertahankan ini */
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden; /* Tetap pertahankan ini */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Set box-sizing globally for all elements */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Tetap pertahankan ini untuk mengatasi potensi overflow dari konten utama */
+main {
+  width: 100%;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Modifikasi padding pada section di dalam main */
+/* PERHATIAN: JANGAN UBAH BAGIAN INI KECUALI ANDA SUDAH MENERAPKAN CONTENT-WRAPPER DI HTML */
+/* Jika Anda belum menerapkan content-wrapper di HTML, padding di section ini bisa jadi penyebab overflow */
+main section {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem; /* Padding responsif untuk konten utama */
+  box-sizing: border-box;
+}
+
+/* Tetap pertahankan .content-wrapper untuk padding global */
+.content-wrapper {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive padding for content wrapper */
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Pindahkan padding sections ke dalam div wrapper */
+#home,
+#about,
+#skills,
+#projects,
+#contact,
+footer {
+  padding-left: 0; /* Pastikan padding-left/right di section ini nol */
+  padding-right: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 #home {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding-left: 5rem;
-  padding-right: 5rem;
+  justify-content: center; /* Ini membuat konten di tengah horizontal */
+  text-align: center; /* Teks di dalam juga rata tengah */
   position: relative;
-  overflow: hidden; /* Pastikan tidak ada overflow horizontal dari elemen di dalam */
-  box-sizing: border-box; /* SANGAT PENTING: padding tidak menambah lebar */
-  width: 100vw; /* Pastikan selalu selebar viewport */
+  overflow: hidden; /* Ini sangat penting untuk membatasi efek bulatan ke dalam #home */
 }
 
 /* Light effect with bouncing animation */
@@ -47,6 +119,11 @@
   pointer-events: none;
   z-index: 0;
   border-radius: 50%;
+  /* PENTING: Untuk animasi bulatan agar bebas, posisi awalnya harus diatur agar dia bisa bergerak ke mana saja */
+  /* Kita bisa menggunakan top/left atau langsung transform di 0% keyframe */
+  top: 0; /* Mulai dari pojok atas */
+  left: 0; /* Mulai dari pojok kiri */
+  transform: translate(0, 0); /* Pastikan ini adalah titik awal yang jelas */
 }
 
 @keyframes bouncingLight {
@@ -55,6 +132,7 @@
     animation-timing-function: ease-out;
   }
   20% {
+    /* Gunakan vw dan vh lagi agar bergerak relatif terhadap viewport */
     transform: translate(calc(100vw - 250px), calc(50vh - 125px));
     animation-timing-function: ease-in;
   }
@@ -78,11 +156,12 @@
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
-  #home {
-    padding-left: 1rem !important; /* Adjust padding for smaller screens */
+  /* HAPUS padding-left/right dari #home di media query jika Anda sudah menggunakan content-wrapper */
+  /* #home {
+    padding-left: 1rem !important;
     padding-right: 1rem !important;
-    width: 100%; /* Pastikan 100% dari parent (body) */
-  }
+    width: 100%;
+  } */
 
   #home::before {
     width: 120px;

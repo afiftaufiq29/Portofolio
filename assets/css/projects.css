@@ -1,14 +1,164 @@
 .project-card {
   transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden; /* Tambahkan ini agar konten tidak meluber saat di-scale */
 }
 
 .project-card:hover {
   transform: scale(1.05);
 }
 
+/* Stil untuk overlay dan popup */
+.project-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease; /* Transisi opacity saja untuk overlay */
+}
+
+.project-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.project-popup {
+  background-color: #1f2937; /* bg-gray-800 dari Tailwind */
+  padding: 2.5rem; /* Sedikit lebih besar */
+  border-radius: 1rem; /* Sedikit lebih melengkung */
+  max-width: 750px; /* Lebar maksimal sedikit lebih besar */
+  width: 90%;
+  position: relative;
+  transform: translateX(50px); /* Mulai dari kanan */
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transisi lebih halus */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); /* Bayangan lebih kuat */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white; /* Pastikan teks di dalam popup putih */
+  text-align: center;
+}
+
+.project-overlay.active .project-popup {
+  transform: translateX(0); /* Berpindah ke tengah */
+  opacity: 1;
+}
+
+.project-overlay.closing .project-popup {
+  transform: translateX(-50px); /* Bergerak ke kiri saat menutup */
+  opacity: 0;
+}
+
+.close-popup {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #4a5568; /* Warna abu-abu gelap */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Membuat tombol bulat */
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  z-index: 1010;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.close-popup:hover {
+  background-color: #a78bfa; /* Warna ungu saat hover */
+  transform: scale(1.1) rotate(90deg); /* Animasi putar dan sedikit membesar */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup-image {
+  width: 100%;
+  max-height: 350px; /* Ketinggian gambar sedikit lebih besar */
+  object-fit: cover;
+  border-radius: 0.75rem; /* Match popup border-radius */
+  margin-bottom: 1.5rem; /* Jarak bawah gambar */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Bayangan pada gambar */
+}
+
+.popup-title {
+  font-size: 2rem; /* Ukuran judul lebih besar */
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  color: #a78bfa; /* Warna ungu untuk judul */
+}
+
+.popup-description {
+  color: #cbd5e0; /* text-gray-300 agar sedikit lebih terang */
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.6; /* Kerapatan baris agar lebih mudah dibaca */
+}
+
+.popup-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem; /* Jarak antar tag */
+  justify-content: center;
+}
+
+.popup-tags span {
+  padding: 0.35rem 1rem; /* Padding tag sedikit lebih besar */
+  background-color: #8b5cf6; /* bg-purple-500 dari Tailwind */
+  border-radius: 9999px; /* rounded-full dari Tailwind */
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 /* Add responsiveness for project cards */
 @media (max-width: 768px) {
   #projects .grid {
     grid-template-columns: 1fr; /* Stack projects vertically on small screens */
+  }
+
+  .project-popup {
+    padding: 1.5rem;
+    width: 95%; /* Lebih lebar di mobile */
+  }
+
+  .close-popup {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .popup-image {
+    max-height: 180px;
+  }
+
+  .popup-title {
+    font-size: 1.75rem;
+  }
+
+  .popup-description {
+    font-size: 0.9rem;
   }
 }

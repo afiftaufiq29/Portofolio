@@ -257,7 +257,7 @@
   /* min-height: 100vh; */ /* Jika ada, bisa dipertimbangkan untuk disesuaikan */
 }
 
-/* ANIMASI NEON BORDER */
+/* ANIMASI NEON BORDER YANG LEBIH SMOOTH */
 .neon-border {
   position: absolute;
   top: 0;
@@ -274,17 +274,20 @@
   position: absolute;
   width: 150%;
   height: 150%;
+  top: -25%;
+  left: -25%;
   background: conic-gradient(
-    transparent,
-    transparent,
-    transparent,
-    #4f46e5,
-    transparent,
-    transparent,
-    transparent,
-    transparent
+    transparent 0deg,
+    transparent 90deg,
+    #4f46e5 140deg,
+    #7c3aed 180deg,
+    #4f46e5 220deg,
+    transparent 270deg,
+    transparent 360deg
   );
-  animation: rotateNeon 4s linear infinite;
+  animation: rotateNeon 5s linear infinite;
+  opacity: 0.7;
+  filter: blur(8px);
 }
 
 @keyframes rotateNeon {
@@ -301,14 +304,15 @@
   position: absolute;
   inset: 2px;
   background: #1f2937;
-  border-radius: 0.75rem;
+  border-radius: 0.65rem;
   z-index: 1;
 }
 
-/* Efek glow */
+/* Efek glow saat hover */
 .about-card:hover .neon-border::before {
-  filter: blur(10px);
   opacity: 1;
+  filter: blur(12px);
+  animation-duration: 3s;
 }
 
 /* Perbaikan posisi konten */
