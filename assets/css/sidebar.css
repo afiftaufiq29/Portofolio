@@ -5,8 +5,13 @@
   right: -300px; /* Sembunyikan sidebar di luar layar kanan */
   width: 300px;
   height: 100%;
-  background: rgba(31, 41, 55, 0.95);
-  backdrop-filter: blur(15px);
+  background: rgba(
+    31,
+    41,
+    55,
+    0.95
+  ); /* Tailwind: bg-gray-800 dengan sedikit transparansi */
+  backdrop-filter: blur(15px); /* Efek blur untuk background */
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Animasi slide */
   padding: 30px 20px;
   z-index: 1000;
@@ -28,47 +33,45 @@
   position: fixed;
   top: 25px;
   right: 25px; /* Posisikan tombol di kanan atas */
-  background: #4f46e5;
-  color: white;
+  background: #4f46e5; /* Tailwind: bg-indigo-600, seperti di gambar */
+  color: white; /* Warna ikon putih */
   border: none;
-  padding: 12px;
-  border-radius: 12px;
+  padding: 12px; /* Sesuaikan padding untuk ukuran ikon dan latar belakang */
+  border-radius: 12px; /* Sudut membulat */
   cursor: pointer;
-  z-index: 1100;
+  z-index: 1100; /* Pastikan di atas elemen lain */
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  display: flex; /* Gunakan flex untuk icon */
+  display: flex; /* Gunakan flex untuk menengahkan ikon */
   align-items: center;
+  justify-content: center; /* Tambahkan ini untuk menengahkan ikon secara horizontal */
+  width: 48px; /* Contoh lebar dan tinggi untuk membuat kotak yang proporsional */
+  height: 48px; /* Agar ikon terpusat di dalam kotak */
 }
 
 .sidebar-toggle:hover {
-  background: #6366f1;
+  background: #6366f1; /* Tailwind: bg-indigo-500, sedikit lebih terang */
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Icon Hamburger Animasi (jika ingin menggunakan icon hamburger) */
-.sidebar-toggle i.fa-bars {
-  transition: transform 0.3s ease;
+/* Styling untuk ikon di dalam tombol toggle */
+.sidebar-toggle i {
+  /* Hapus .fa-bars dari selektor di sini agar aturan rotasi tidak berlaku */
+  /* Font-size dari Tailwind (text-2xl) atau diatur di sini jika ingin override */
+  font-size: 24px; /* Ukuran ikon, sesuaikan jika perlu */
+  line-height: 1; /* Pastikan ikon tidak punya tinggi baris berlebihan */
+  transition: transform 0.3s ease; /* Tetap ada transisi jika ingin animasi lain di masa depan */
 }
 
-.sidebar.active .sidebar-toggle i.fa-bars {
-  transform: rotate(90deg); /* Contoh rotasi icon saat sidebar terbuka */
-}
+/* Hapus atau komentari aturan ini jika kamu tidak ingin ikon far fa-grin-tongue-wink berputar */
+/* .sidebar.active .sidebar-toggle i.fa-bars {
+  transform: rotate(90deg);
+} */
 
-/* Styling Link Modern */
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 40px;
-}
-
-.sidebar ul li {
-  margin: 15px 0;
-  position: relative;
-}
-
-.sidebar ul li a {
+/* Styling Link di dalam Sidebar */
+.sidebar a {
+  /* Menggunakan 'a' langsung karena semua link di sidebar */
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-size: 1.1rem;
@@ -77,27 +80,40 @@
   display: flex;
   align-items: center;
   transition: all 0.3s ease;
+  margin-bottom: 10px; /* Jarak antar link */
 }
 
-.sidebar ul li a:hover {
+.sidebar a:hover {
   color: #fff;
-  background: rgba(79, 70, 229, 0.15);
+  background: rgba(79, 70, 229, 0.15); /* bg-indigo-600 dengan transparansi */
   transform: translateX(-10px); /* Geser ke kiri saat hover */
 }
 
-.sidebar ul li a::before {
+.sidebar a::before {
   content: "";
   position: absolute;
   right: 0; /* Garis di kanan link */
   width: 3px;
   height: 0%;
-  background: #6366f1;
+  background: #6366f1; /* Warna indigo yang lebih terang */
   border-radius: 5px 0 0 5px; /* Sudut melengkung di kanan */
   transition: all 0.3s ease;
 }
 
-.sidebar ul li a:hover::before {
+.sidebar a:hover::before {
   height: 60%;
+}
+
+/* Styling untuk ikon media sosial di bagian bawah sidebar */
+.sidebar .flex.space-x-4 {
+  margin-top: 20px; /* Beri jarak dari link navigasi */
+  justify-content: center; /* Pusatkan ikon sosial */
+}
+
+.sidebar .flex.space-x-4 a {
+  padding: 0; /* Hapus padding yang mungkin mengganggu dari aturan 'a' umum */
+  margin-bottom: 0; /* Hapus margin bawah */
+  display: inline-block; /* Agar bisa diatur jaraknya dengan space-x-4 */
 }
 
 /* Overlay untuk Background */
@@ -113,16 +129,17 @@
   display: none;
 }
 
-.sidebar.active + .sidebar-overlay {
+/* Bagian ini Dihapus atau diabaikan karena JavaScript sudah menangani display overlay */
+/* .sidebar.active ~ .sidebar-overlay {
   display: block;
-}
+} */
 
 /* Media query untuk mobile (jika perlu penyesuaian khusus mobile) */
 @media (max-width: 768px) {
   .sidebar {
     width: 85%; /* Lebih lebar di mobile */
     right: -85%; /* Sembunyikan lebih jauh */
-    border-radius: 0;
+    border-radius: 0; /* Hapus border-radius di mobile jika sidebar penuh layar */
     padding: 25px 15px;
   }
 
@@ -134,10 +151,23 @@
     top: 15px;
     right: 15px; /* Posisikan tombol di kanan atas mobile */
     padding: 10px;
+    width: 44px; /* Sesuaikan ukuran tombol di mobile */
+    height: 44px;
   }
 
-  .sidebar ul li a {
+  .sidebar-toggle i {
+    font-size: 22px; /* Sedikit lebih kecil di mobile */
+  }
+
+  .sidebar a {
     font-size: 1rem;
     padding: 10px 15px;
+  }
+}
+
+/* Sembunyikan tombol mobile-menu-button di desktop */
+@media (min-width: 769px) {
+  .mobile-menu-button {
+    display: none !important;
   }
 }

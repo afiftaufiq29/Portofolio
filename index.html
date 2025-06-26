@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Afif Taufiqurrohman - Portfolio</title>
-    <link rel="icon" href="assets/images/logo/halloween.png" type="image/png" />
+    <link rel="icon" href="assets/images/logo/shock.png" type="image/png" />
     <link rel="stylesheet" href="assets/css/home.css" />
     <link rel="stylesheet" href="assets/css/mobile-menu.css" />
     <link rel="stylesheet" href="assets/css/sidebar.css" />
@@ -155,7 +155,7 @@
     </nav>
 
     <button class="sidebar-toggle">
-      <i class="fas fa-bars text-2xl"></i>
+      <i class="far fa-grin-tongue-wink text-2xl"></i>
     </button>
 
     <div class="sidebar-overlay"></div>
@@ -424,28 +424,44 @@
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
             <div data-aos="fade-right">
-              <form class="space-y-6">
+              <form class="space-y-6" onsubmit="sendWhatsAppMessage(event)">
                 <div>
-                  <label class="block text-gray-400 mb-2">Nama</label>
+                  <label for="nama" class="block text-gray-400 mb-2"
+                    >Nama</label
+                  >
                   <input
                     type="text"
+                    id="nama"
+                    name="nama"
                     class="w-full bg-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    required
                   />
                 </div>
                 <div>
-                  <label class="block text-gray-400 mb-2">Email</label>
+                  <label for="email" class="block text-gray-400 mb-2"
+                    >Email</label
+                  >
                   <input
                     type="email"
+                    id="email"
+                    name="email"
                     class="w-full bg-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    required
                   />
                 </div>
                 <div>
-                  <label class="block text-gray-400 mb-2">Pesan</label>
+                  <label for="pesan" class="block text-gray-400 mb-2"
+                    >Pesan</label
+                  >
                   <textarea
+                    id="pesan"
+                    name="pesan"
                     class="w-full bg-gray-800 rounded-lg p-3 h-32 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    required
                   ></textarea>
                 </div>
                 <button
+                  type="submit"
                   class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full transition-colors w-full"
                 >
                   Kirim Pesan
@@ -462,8 +478,13 @@
                   <i class="fas fa-phone mr-2"></i> +6287780513606
                 </p>
                 <p class="text-gray-400">
-                  <i class="fas fa-map-marker-alt mr-2"></i> Ketapang,
-                  Kalimantan Barat
+                  <i class="fas fa-map-marker-alt mr-2"></i>
+                  <a
+                    href="https://www.google.com/maps/place/Ketapang,+Kalimantan+Barat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Ketapang, Kalimantan Barat</a
+                  >
                 </p>
               </div>
               <div class="mt-12">
@@ -510,7 +531,7 @@
             class="container mx-auto flex flex-col md:flex-row justify-between items-center"
           >
             <p class="text-gray-400">
-              &copy; 2024 Afif Taufiqurrohman. All rights reserved.
+              © 2024 Afif Taufiqurrohman. All rights reserved.
             </p>
             <div class="mt-4 md:mt-0">
               <a href="#" class="text-gray-400 hover:text-purple-400 mx-2"
@@ -612,7 +633,15 @@
           if (sidebar.classList.contains("active")) {
             if (mobileMenuButton) mobileMenuButton.style.display = "none";
           } else {
-            if (mobileMenuButton) mobileMenuButton.style.display = "block";
+            // Hanya tampilkan mobileMenuButton jika tidak ada sidebar atau mobile menu lain yang aktif
+            if (
+              window.innerWidth <= 768 &&
+              !mobileMenu.classList.contains("active")
+            ) {
+              if (mobileMenuButton) mobileMenuButton.style.display = "block";
+            } else {
+              if (mobileMenuButton) mobileMenuButton.style.display = "none";
+            }
           }
         }
 
@@ -722,6 +751,36 @@
           document.removeEventListener("mouseup", onMouseUp);
         }
       });
+
+      // --- WhatsApp Integration Script ---
+      function sendWhatsAppMessage(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const name = document.getElementById("nama").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("pesan").value;
+
+        // Your WhatsApp number (replace with your actual number, including country code without '+' or '00')
+        const phoneNumber = "6287780513606"; // Example: 6287780513606 for Indonesia
+
+        // Construct the message for WhatsApp
+        const whatsappMessage = `Hello Afif,%0A%0AI have a message from your portfolio website:%0A%0AName: ${encodeURIComponent(
+          name
+        )}%0AEmail: ${encodeURIComponent(
+          email
+        )}%0AMessage: ${encodeURIComponent(message)}`;
+
+        // Construct the WhatsApp URL
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+
+        // Open WhatsApp in a new tab/window
+        window.open(whatsappUrl, "_blank");
+
+        // Optionally, clear the form after submission
+        document.getElementById("nama").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("pesan").value = "";
+      }
     </script>
     <script src="assets/js/projects.js"></script>
   </body>
