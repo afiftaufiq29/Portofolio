@@ -2,37 +2,59 @@ document.addEventListener("DOMContentLoaded", function () {
   const projectCards = document.querySelectorAll(".project-card");
   const projectOverlay = document.getElementById("projectOverlay");
   const closePopupBtn = document.getElementById("closePopup");
-  const popupImage = document.getElementById("popupImage");
+  const popupSliderWrapper = document.getElementById("popupSliderWrapper"); // Wrapper gambar
+  const sliderPrevBtn = document.getElementById("sliderPrevBtn"); // Tombol Previous
+  const sliderNextBtn = document.getElementById("sliderNextBtn"); // Tombol Next
+  const sliderDotsContainer = document.getElementById("sliderDots"); // Kontainer dots
+
   const popupTitle = document.getElementById("popupTitle");
   const popupDescription = document.getElementById("popupDescription");
   const popupTags = document.getElementById("popupTags");
-  const mainContent = document.querySelector("main"); // Dapatkan elemen main content
 
-  // Data proyek (Anda bisa mengambil ini dari API atau struktur data lain)
+  let currentSlideIndex = 0;
+  let currentProjectImages = []; // Untuk menyimpan gambar proyek yang sedang aktif
+
+  // Data proyek (pastikan ada 3 gambar untuk setiap proyek)
   const projectsData = {
     project1: {
-      image: "assets/images/project1.jpg",
+      images: [
+        "assets/images/projects1/project_1.jpg",
+        "assets/images/projects1/project_2.jpg",
+        "assets/images/projects1/project_3.jpg",
+      ],
       title: "Cam-Scanner Web",
       description:
         "Sebuah website detektor judi online yang dikembangkan untuk membantu identifikasi situs-situs ilegal, menggunakan Laravel dan JavaScript untuk fungsionalitas front-end yang dinamis dan efisien.",
       tags: ["Laravel", "JavaScript", "HTML", "CSS"],
     },
     project2: {
-      image: "assets/images/project2.jpg",
+      images: [
+        "assets/images/projects2/project_1.jpg",
+        "assets/images/projects2/project_2.jpg",
+        "assets/images/projects2/project_3.jpg",
+      ],
       title: "Restaurant App",
       description:
         "Aplikasi mobile yang intuitif untuk pemesanan dan manajemen restoran, dibangun dengan Flutter untuk kinerja lintas platform dan efisiensi database MySQL.",
       tags: ["Flutter", "MySQL", "Dart"],
     },
     project3: {
-      image: "assets/images/project3.jpg",
+      images: [
+        "assets/images/projects3/project_1.jpg",
+        "assets/images/projects3/project_2.jpg",
+        "assets/images/projects3/project_3.jpg",
+      ],
       title: "Portfolio Website",
       description:
         "Website portofolio pribadi ini menampilkan desain web modern dan responsif, dibangun dengan fondasi HTML, CSS (menggunakan TailwindCSS), dan JavaScript untuk pengalaman pengguna yang interaktif.",
       tags: ["HTML", "CSS", "JavaScript", "TailwindCSS"],
     },
     project4: {
-      image: "assets/images/project4.jpg",
+      images: [
+        "assets/images/projects4/project_1.jpg",
+        "assets/images/projects4/project_2.jpg",
+        "assets/images/projects4/project_3.jpg",
+      ],
       title: "Restaurant Web",
       description:
         "Website manajemen restoran lengkap dengan fitur pemesanan, menu, dan reservasi, dikembangkan menggunakan Laravel dan MySQL untuk back-end yang kuat, serta PHP untuk pemrosesan server.",
@@ -40,16 +62,53 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
+  function updateSlider() {
+    if (currentProjectImages.length === 0) {
+      popupSliderWrapper.style.transform = `translateX(0)`;
+      sliderDotsContainer.innerHTML = "";
+      return;
+    }
+    const offset = -currentSlideIndex * 100;
+    popupSliderWrapper.style.transform = `translateX(${offset}%)`;
+
+    // Update dots
+    sliderDotsContainer.innerHTML = "";
+    currentProjectImages.forEach((_, idx) => {
+      const dot = document.createElement("span");
+      dot.classList.add("slider-dot");
+      if (idx === currentSlideIndex) {
+        dot.classList.add("active");
+      }
+      dot.addEventListener("click", () => {
+        currentSlideIndex = idx;
+        updateSlider();
+      });
+      sliderDotsContainer.appendChild(dot);
+    });
+  }
+
   projectCards.forEach((card) => {
     card.addEventListener("click", function () {
       const projectId = this.dataset.projectId;
-      const project = projectsData?.[projectId]; // Gunakan optional chaining untuk keamanan
+      const project = projectsData?.[projectId];
 
       if (project) {
-        popupImage.src = project.image;
+        currentProjectImages = project.images;
+        currentSlideIndex = 0; // Reset ke gambar pertama setiap kali popup dibuka
+
+        // Bersihkan wrapper dan tambahkan gambar
+        popupSliderWrapper.innerHTML = "";
+        currentProjectImages.forEach((imageSrc) => {
+          const img = document.createElement("img");
+          img.src = imageSrc;
+          img.alt = project.title;
+          // Tidak perlu lagi popup-image-item, styling langsung di popup-slider-wrapper img
+          popupSliderWrapper.appendChild(img);
+        });
+
         popupTitle.textContent = project.title;
         popupDescription.textContent = project.description;
-        popupTags.innerHTML = ""; // Bersihkan tag sebelumnya
+        popupTags.innerHTML = "";
         project.tags.forEach((tag) => {
           const span = document.createElement("span");
           span.classList.add(
@@ -63,23 +122,36 @@ document.addEventListener("DOMContentLoaded", function () {
           popupTags.appendChild(span);
         });
 
-        projectOverlay.classList.remove("closing"); // Hapus kelas closing jika ada
+        projectOverlay.classList.remove("closing");
         projectOverlay.classList.add("active");
-        document.body.style.overflow = "hidden"; // Mencegah scroll pada body
+        document.body.style.overflow = "hidden";
+
+        // Update slider setelah gambar dimuat ke DOM
+        updateSlider();
       }
     });
   });
 
+  sliderPrevBtn.addEventListener("click", () => {
+    currentSlideIndex =
+      (currentSlideIndex - 1 + currentProjectImages.length) %
+      currentProjectImages.length;
+    updateSlider();
+  });
+
+  sliderNextBtn.addEventListener("click", () => {
+    currentSlideIndex = (currentSlideIndex + 1) % currentProjectImages.length;
+    updateSlider();
+  });
+
   closePopupBtn.addEventListener("click", closePopup);
 
-  // Menutup popup saat mengklik di luar area popup
   projectOverlay.addEventListener("click", function (e) {
     if (e.target === projectOverlay) {
       closePopup();
     }
   });
 
-  // Menutup popup dengan tombol ESC
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && projectOverlay.classList.contains("active")) {
       closePopup();
@@ -88,12 +160,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function closePopup() {
     projectOverlay.classList.remove("active");
-    projectOverlay.classList.add("closing"); // Tambahkan kelas closing untuk animasi keluar
-    document.body.style.overflow = "auto"; // Mengembalikan scroll pada body
+    projectOverlay.classList.add("closing");
+    document.body.style.overflow = "auto";
 
-    // Setelah animasi selesai (durasi transisi CSS), hapus kelas closing
     setTimeout(() => {
       projectOverlay.classList.remove("closing");
-    }, 400); // Sesuaikan dengan durasi transisi di CSS
+    }, 400);
   }
 });

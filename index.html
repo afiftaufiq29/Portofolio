@@ -294,7 +294,7 @@
               data-project-id="project1"
             >
               <img
-                src="assets/images/project1.jpg"
+                src="assets/images/projects1/project_1.jpg"
                 alt="Project 1"
                 class="w-full h-48 object-cover"
               />
@@ -320,7 +320,7 @@
               data-project-id="project2"
             >
               <img
-                src="assets/images/project2.jpg"
+                src="assets/images/projects2/project_1.jpg"
                 alt="Project 2"
                 class="w-full h-48 object-cover"
               />
@@ -346,7 +346,7 @@
               data-project-id="project3"
             >
               <img
-                src="assets/images/project3.jpg"
+                src="assets/images/projects3/project_1.jpg"
                 alt="Project 3"
                 class="w-full h-48 object-cover"
               />
@@ -374,7 +374,7 @@
               data-project-id="project4"
             >
               <img
-                src="assets/images/project4.jpg"
+                src="assets/images/projects4/project_1.jpg"
                 alt="Project 2"
                 class="w-full h-48 object-cover"
               />
@@ -400,13 +400,23 @@
       <div class="project-overlay" id="projectOverlay">
         <div class="project-popup">
           <button class="close-popup" id="closePopup">X</button>
-          <img src="" alt="Project Image" class="popup-image" id="popupImage" />
+
+          <div class="popup-slider-container">
+            <div class="popup-slider-wrapper" id="popupSliderWrapper"></div>
+            <button class="slider-nav-btn prev" id="sliderPrevBtn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav-btn next" id="sliderNextBtn">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="slider-dots" id="sliderDots"></div>
+          </div>
+
           <h3 class="popup-title" id="popupTitle"></h3>
           <p class="popup-description" id="popupDescription"></p>
           <div class="popup-tags" id="popupTags"></div>
         </div>
       </div>
-
       <section id="contact" class="min-h-screen py-20">
         <div class="content-wrapper">
           <h2 class="text-4xl font-bold gradient-text mb-20" data-aos="fade-up">
@@ -416,7 +426,7 @@
             <div data-aos="fade-right">
               <form class="space-y-6">
                 <div>
-                  <label class="block text-gray-400 mb-2">Name</label>
+                  <label class="block text-gray-400 mb-2">Nama</label>
                   <input
                     type="text"
                     class="w-full bg-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -430,7 +440,7 @@
                   />
                 </div>
                 <div>
-                  <label class="block text-gray-400 mb-2">Message</label>
+                  <label class="block text-gray-400 mb-2">Pesan</label>
                   <textarea
                     class="w-full bg-gray-800 rounded-lg p-3 h-32 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   ></textarea>
@@ -438,7 +448,7 @@
                 <button
                   class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full transition-colors w-full"
                 >
-                  Send Message
+                  Kirim Pesan
                 </button>
               </form>
             </div>
@@ -457,7 +467,7 @@
                 </p>
               </div>
               <div class="mt-12">
-                <h3 class="text-xl font-bold mb-4">Follow Me</h3>
+                <h3 class="text-xl font-bold mb-4">Ikuti Saya</h3>
                 <div class="flex space-x-6">
                   <a
                     href="https://github.com/afiftaufiq29"
@@ -504,10 +514,10 @@
             </p>
             <div class="mt-4 md:mt-0">
               <a href="#" class="text-gray-400 hover:text-purple-400 mx-2"
-                >Privacy Policy</a
+                >Kebijakan Privasi</a
               >
               <a href="#" class="text-gray-400 hover:text-purple-400 mx-2"
-                >Terms of Service</a
+                >Ketentuan Layanan</a
               >
             </div>
           </div>

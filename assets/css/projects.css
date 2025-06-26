@@ -1,3 +1,5 @@
+/* assets/css/projects.css */
+
 .project-card {
   transition: all 0.3s ease;
   position: relative;
@@ -26,7 +28,7 @@
   align-items: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease; /* Transisi opacity saja untuk overlay */
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .project-overlay.active {
@@ -36,30 +38,32 @@
 
 .project-popup {
   background-color: #1f2937; /* bg-gray-800 dari Tailwind */
-  padding: 2.5rem; /* Sedikit lebih besar */
-  border-radius: 1rem; /* Sedikit lebih melengkung */
-  max-width: 750px; /* Lebar maksimal sedikit lebih besar */
+  padding: 2.5rem;
+  border-radius: 1rem;
+  max-width: 750px;
   width: 90%;
   position: relative;
-  transform: translateX(50px); /* Mulai dari kanan */
+  transform: translateX(50px);
   opacity: 0;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transisi lebih halus */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); /* Bayangan lebih kuat */
+    opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white; /* Pastikan teks di dalam popup putih */
+  color: white;
   text-align: center;
+  max-height: 90vh; /* Batasi tinggi popup agar bisa discroll jika konten banyak */
+  overflow-y: auto; /* Aktifkan scroll jika konten melebihi tinggi */
 }
 
 .project-overlay.active .project-popup {
-  transform: translateX(0); /* Berpindah ke tengah */
+  transform: translateX(0);
   opacity: 1;
 }
 
 .project-overlay.closing .project-popup {
-  transform: translateX(-50px); /* Bergerak ke kiri saat menutup */
+  transform: translateX(-50px);
   opacity: 0;
 }
 
@@ -67,10 +71,10 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background-color: #4a5568; /* Warna abu-abu gelap */
+  background-color: #4a5568;
   color: white;
   border: none;
-  border-radius: 50%; /* Membuat tombol bulat */
+  border-radius: 50%;
   width: 35px;
   height: 35px;
   display: flex;
@@ -86,60 +90,145 @@
 }
 
 .close-popup:hover {
-  background-color: #a78bfa; /* Warna ungu saat hover */
-  transform: scale(1.1) rotate(90deg); /* Animasi putar dan sedikit membesar */
+  background-color: #a78bfa;
+  transform: scale(1.1) rotate(90deg);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.popup-image {
+/* --- Gaya untuk Slider Gambar (Diperbarui agar Gambar Tidak Terpotong & Memenuhi Card) --- */
+.popup-slider-container {
+  position: relative;
   width: 100%;
-  max-height: 350px; /* Ketinggian gambar sedikit lebih besar */
-  object-fit: cover;
-  border-radius: 0.75rem; /* Match popup border-radius */
-  margin-bottom: 1.5rem; /* Jarak bawah gambar */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Bayangan pada gambar */
+  max-width: 600px; /* Batasi lebar maksimal slider */
+  height: auto; /* Tinggi akan menyesuaikan dengan rasio aspek gambar */
+  max-height: 450px; /* Batas tinggi maksimal agar tidak terlalu besar */
+  overflow: hidden; /* Sembunyikan gambar di luar tampilan */
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  display: flex; /* Gunakan flex untuk mengatur gambar di tengah */
+  align-items: center; /* Vertikal tengah */
+  justify-content: center; /* Horizontal tengah */
+}
+
+.popup-slider-wrapper {
+  display: flex;
+  width: 100%; /* Pastikan wrapper juga 100% */
+  height: auto; /* Tinggi akan menyesuaikan konten gambar */
+  transition: transform 0.5s ease-in-out; /* Animasi geser gambar */
+}
+
+.popup-slider-wrapper img {
+  width: 100%; /* Setiap gambar mengambil 100% lebar wrapper */
+  height: auto; /* Biarkan tinggi menyesuaikan aspek rasio */
+  object-fit: contain; /* PENTING: Gunakan 'contain' agar seluruh gambar terlihat */
+  flex-shrink: 0; /* Penting: mencegah gambar mengecil */
+  border-radius: 0.75rem;
+  background-color: #1a202c; /* Warna latar belakang jika gambar tidak memenuhi */
+}
+
+.slider-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none; /* HILANGKAN BACKGROUND */
+  border: none;
+  color: #c5c5c5; /* Warna abu-abu terang */
+  width: 40px; /* SESUAIKAN UKURAN */
+  height: 40px; /* SESUAIKAN UKURAN */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem; /* UKURAN IKON */
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.8; /* Sedikit transparan saat idle */
+  transition: color 0.3s ease, opacity 0.3s ease, transform 0.2s ease; /* Transisi lebih halus */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.7); /* Efek glow/shadow */
+}
+
+.slider-nav-btn:hover {
+  color: #a78bfa; /* Warna UNGU saat hover */
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1); /* Efek membesar saat hover */
+}
+
+.slider-nav-btn.prev {
+  left: 0.5rem; /* Posisi lebih dekat ke tepi */
+}
+
+.slider-nav-btn.next {
+  right: 0.5rem; /* Posisi lebih dekat ke tepi */
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 0.8rem; /* Sedikit lebih tinggi dari bawah */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem; /* Jarak antar dot */
+  z-index: 10;
+  padding: 0.2rem 0.5rem; /* Padding agar dots tidak terlalu mepet */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.3
+  ); /* Background dots agar lebih terlihat */
+  border-radius: 1rem;
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.slider-dot.active {
+  background-color: #a78bfa; /* Warna ungu untuk dot aktif */
+  transform: scale(1.2); /* Dot aktif sedikit membesar */
 }
 
 .popup-title {
-  font-size: 2rem; /* Ukuran judul lebih besar */
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 0.75rem;
-  color: #a78bfa; /* Warna ungu untuk judul */
+  color: #a78bfa;
 }
 
 .popup-description {
-  color: #cbd5e0; /* text-gray-300 agar sedikit lebih terang */
+  color: #cbd5e0;
   text-align: center;
   margin-bottom: 1.5rem;
-  line-height: 1.6; /* Kerapatan baris agar lebih mudah dibaca */
+  line-height: 1.6;
 }
 
 .popup-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem; /* Jarak antar tag */
+  gap: 0.75rem;
   justify-content: center;
 }
 
 .popup-tags span {
-  padding: 0.35rem 1rem; /* Padding tag sedikit lebih besar */
-  background-color: #8b5cf6; /* bg-purple-500 dari Tailwind */
-  border-radius: 9999px; /* rounded-full dari Tailwind */
+  padding: 0.35rem 1rem;
+  background-color: #8b5cf6;
+  border-radius: 9999px;
   font-size: 0.9rem;
   font-weight: 500;
   color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Add responsiveness for project cards */
+/* Responsive Adjustments for Slider */
 @media (max-width: 768px) {
-  #projects .grid {
-    grid-template-columns: 1fr; /* Stack projects vertically on small screens */
-  }
-
   .project-popup {
     padding: 1.5rem;
-    width: 95%; /* Lebih lebar di mobile */
+    width: 95%;
   }
 
   .close-popup {
@@ -150,8 +239,36 @@
     right: 0.75rem;
   }
 
-  .popup-image {
-    max-height: 180px;
+  .popup-slider-container {
+    height: auto; /* Biarkan tinggi menyesuaikan di mobile */
+    max-height: 300px; /* Batas tinggi maksimal di mobile */
+    max-width: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slider-nav-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1.5rem;
+  }
+
+  .slider-nav-btn.prev {
+    left: 0.2rem;
+  }
+
+  .slider-nav-btn.next {
+    right: 0.2rem;
+  }
+
+  .slider-dots {
+    bottom: 0.2rem;
+    gap: 0.4rem;
+  }
+  .slider-dot {
+    width: 8px;
+    height: 8px;
   }
 
   .popup-title {
